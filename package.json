@@ -23,7 +23,10 @@
     "test": "node_modules/.bin/karma start",
     "watch:test": "npm run test -- --auto-watch --no-single-run",
     "format": "gulp clang:format",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "pack:core": "npm run build && npm pack dist/core",
+    "deploy:s3": "./node_modules/.bin/s3-deploy cyft-ng-idle-core*.tgz --bucket node-modules.cyft.io",
+    "deploy:full": "npm run pack:core && npm run deploy:s3 && rm cyft-ng-idle-core*.tgz"
   },
   "repository": {
     "type": "git",
@@ -75,7 +78,8 @@
   "dependencies": {
     "@angular/common": "^2.0.0",
     "@angular/core": "^2.0.0",
-    "@angular/http": "^2.0.0"
+    "@angular/http": "^2.0.0",
+    "s3-deploy": "^0.7.3"
   },
   "config": {
     "commitizen": {
