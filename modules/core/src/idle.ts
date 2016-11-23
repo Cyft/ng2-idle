@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Optional} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Optional, NgZone} from '@angular/core';
 
 import {IdleExpiry} from './idleexpiry';
 import {Interrupt} from './interrupt';
@@ -50,7 +50,11 @@ export class Idle implements OnDestroy {
 
   [key: string]: any;
 
-  constructor(private expiry: IdleExpiry, @Optional() keepaliveSvc?: KeepaliveSvc) {
+  constructor(
+    private expiry: IdleExpiry,
+    private ngZone: NgZone,
+    @Optional() keepaliveSvc?: KeepaliveSvc
+  ) {
     if (keepaliveSvc) {
       this.keepaliveSvc = keepaliveSvc;
       this.keepaliveEnabled = true;
@@ -218,9 +222,13 @@ export class Idle implements OnDestroy {
 
     this.running = true;
 
-    this.idleHandle = setInterval(() => {
-      this.toggleState();
-    }, this.idle * 1000);
+    this.ngZone.runOutsideAngular(() => {
+      this.idleHandle = setInterval(() => {
+        this.ngZone.run(() => {
+          this.toggleState();
+        });
+      }, this.idle * 1000);
+    });
   }
 
   /*
@@ -290,9 +298,14 @@ export class Idle implements OnDestroy {
       if (this.timeoutVal > 0) {
         this.countdown = this.timeoutVal;
         this.doCountdown();
-        this.timeoutHandle = setInterval(() => {
-          this.doCountdown();
-        }, 1000);
+
+        this.ngZone.runOutsideAngular(() => {
+          this.timeoutHandle = setInterval(() => {
+            this.ngZone.run(() => {
+              this.doCountdown();
+            });
+          }, 1000);
+        });
       }
     } else {
       this.toggleInterrupts(true);
