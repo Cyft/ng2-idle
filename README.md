@@ -1,4 +1,15 @@
 # Introduction
+
+## Cyft Build
+
+If changes need to be made to this library please run
+
+```
+npm run deploy:full
+```
+
+This will send a tar with the current version to the S3 Bucket node-modules.cyft.io
+
 [![Join the chat at https://gitter.im/HackedByChinese/ng2-idle](https://badges.gitter.im/HackedByChinese/ng2-idle.svg)](https://gitter.im/HackedByChinese/ng2-idle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/HackedByChinese/ng2-idle.svg?branch=master)](https://travis-ci.org/HackedByChinese/ng2-idle) [![Coverage Status](https://coveralls.io/repos/github/HackedByChinese/ng2-idle/badge.svg?branch=master)](https://coveralls.io/github/HackedByChinese/ng2-idle?branch=master)
 
 A module for responding to idle users in Angular2 applications. This is a rewrite of the [ng-idle module](https://github.com/HackedByChinese/ng-idle); however if you are using Angular 1, you must use that module.
