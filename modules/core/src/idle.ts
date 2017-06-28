@@ -32,15 +32,15 @@ export enum AutoResume {
 @Injectable()
 export class Idle implements OnDestroy {
   private idle: number = 20 * 60;   // in seconds
-  private timeoutVal: number = 30;  // in seconds
+  private timeoutVal = 30;  // in seconds
   private autoResume: AutoResume = AutoResume.idle;
   private interrupts: Array<Interrupt> = new Array;
-  private running: boolean = false;
-  private idling: boolean = false;
+  private running = false;
+  private idling = false;
   private idleHandle: any;
   private timeoutHandle: any;
   private countdown: number;
-  private keepaliveEnabled: boolean = false;
+  private keepaliveEnabled = false;
   private keepaliveSvc: KeepaliveSvc;
 
   public onIdleStart: EventEmitter<any> = new EventEmitter;
