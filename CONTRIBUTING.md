@@ -11,7 +11,7 @@ This guide will describe how _you_ can contribute to this module.
 
 ## <a name="getting-help"></a> Getting Help
 
-Questions and comments for AngularJS should be directed [here][angularhelp].
+Questions and comments for Angular should be directed [here][angularhelp].
 
 I ask that you do not use GitHub Issues to ask questions. Instead, please use [Gitter] or [StackOverflow] for help.
 
@@ -27,14 +27,14 @@ Once you have determined that you have an unreported problem, please use the fol
 
 - Overview of the Issue - Include any non-minified stack trace and other runtime errors that are available and relevant to the issue.
 - Use Case - Explain why this is a bug for you
-- Angular 2 and `@ng-idle` version(s) - Is this an issue with Angular 2, or a regression bug in this module?
+- Angular 2+ and `@ng-idle` version(s) - Is this an issue with Angular 2+, or a regression bug in this module?
 - Reproduce the Error - Please, please, please **provide a working example** either by including a Plunker or JSFiddle, or an unambiguous set of steps! Doing the footwork up front will allow me to replicate and fix the problem faster.
 - Related Issues - Please note any related issues, if any.
 - Suggest a Fix - If you have an idea of what's causing the problem (line of code or a commit), please point it out.
 
 ## <a name="committing"></a> Git Commit Guidelines
 
-I follow the `conventional-changelog` format used by the AngularJS team. You can follow the format manually, but I highly recommend you use a CLI wizard such as [Commitizen][commitizen].
+I follow the `conventional-changelog` format used by the Angular team. You can follow the format manually, but I highly recommend you use a CLI wizard such as [Commitizen][commitizen].
 
 In fact, I have configured this repository to work with Commitizen. First, ensure Commitizen CLI is installed via `npm install -g commitizen`. Next, make sure the clone of this repository is installed via `npm install`. You're all set! Now, whenever you want to commit, just stage your changes e.g. `git add .` and commit using `git cz`. Follow the prompts and you're done.
 
@@ -103,8 +103,8 @@ Please follow these steps to submit a pull request:
 * After cloning the [repo][githubrepo], install the dev dependencies using `npm install`.
 * Check out a work branch for your changes. `npm checkout -b my-fix master`.
 * Make your changes, **including test cases**.
-* Run `gulp test`. Ensure all tests pass.
-* Run `gulp build` and correct any linting warnings or errors. You can use `gulp clang:format` to automatically fix most style errors.
+* Run `npm test`. Ensure all tests pass.
+* Run `npm run build` and correct any linting warnings or errors.
 * Commit using the [Git Commit Guidelines](#committing).
 * Submit a pull request to `ng2-idle:master`.
 * I will review your PR, and may suggest changes. If changes are suggested:

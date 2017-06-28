@@ -17,6 +17,10 @@ describe('core/IdleExpiry', () => {
     expect(instance.id()).toBe(expected);
   });
 
+  it('id() when empty value should throw error', () => {
+    expect(() => { instance.id(''); }).toThrowError('A value must be specified for the ID.');
+  });
+
   it('id() returns default value', () => {
     let expected = new Date();
     jasmine.clock().mockDate(expected);
@@ -24,6 +28,22 @@ describe('core/IdleExpiry', () => {
     let actual = instance.id();
 
     expect(actual).toEqual(expected);
+  });
+
+  it('idling() returns the current value', () => {
+    expect(instance.idling()).toBeFalsy();
+  });
+
+  it('idling() sets the specified value', () => {
+    let expected = true;
+    expect(instance.idling(expected)).toEqual(expected);
+    expect(instance.idling()).toEqual(expected);
+  });
+
+  it('idling() with null param return null', () => {
+    let expected = null;
+    expect(instance.idling(expected)).toEqual(expected);
+    expect(instance.idling()).toEqual(expected);
   });
 
   it('isExpired() returns true if last() is less than or equal to now', () => {
@@ -48,4 +68,5 @@ describe('core/IdleExpiry', () => {
     instance.last(null);
     expect(instance.isExpired()).toBe(false);
   });
+
 });

@@ -1,3 +1,87 @@
+<a name="2.0.0-beta.12"></a>
+# [2.0.0-beta.12](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.11...v2.0.0-beta.12) (2017-05-30)
+
+
+### Bug Fixes
+
+* **idle:** use expiry.now() if expiry.last() returns null ([06fcb36](https://github.com/HackedByChinese/ng2-idle/commit/06fcb36)), closes [#54](https://github.com/HackedByChinese/ng2-idle/issues/54)
+
+
+
+<a name="2.0.0-beta.11"></a>
+# [2.0.0-beta.11](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2017-04-14)
+
+### Refactor
+
+* updated imports of rxjs to only import the operators and types used.
+
+<a name="2.0.0-beta.10"></a>
+# [2.0.0-beta.10](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2017-03-30)
+
+
+### Chores
+
+* **deps**: support Angular 4 in addition to Angular 2
+
+<a name="2.0.0-beta.9"></a>
+# [2.0.0-beta.9](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2017-03-20)
+
+
+### Bug Fixes
+
+* **idle:** check expiry on timeout doCountdown ([e23233d](https://github.com/HackedByChinese/ng2-idle/commit/e23233d))
+
+
+
+<a name="2.0.0-beta.8"></a>
+# [2.0.0-beta.8](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2017-02-20)
+
+
+### Bug Fixes
+
+* Initialize localStorage idling value to false in constructor ([ab71433](https://github.com/HackedByChinese/ng2-idle/commit/ab71433))
+
+
+
+<a name="2.0.0-beta.7"></a>
+# [2.0.0-beta.7](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2017-02-16)
+
+
+### Bug Fixes
+
+* **core:** check expiry before toggling idle state ([6702c36](https://github.com/HackedByChinese/ng2-idle/commit/6702c36)), closes [#37](https://github.com/HackedByChinese/ng2-idle/issues/37)
+
+
+
+<a name="2.0.0-beta.6"></a>
+# [2.0.0-beta.6](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2017-02-14)
+
+
+### Bug Fixes
+
+* AutoResume.notIdle with LocalStorageExpiry wasn't working well ([935ade9](https://github.com/HackedByChinese/ng2-idle/commit/935ade9))
+* bugfix when last() with null value throws exception ([5b3d175](https://github.com/HackedByChinese/ng2-idle/commit/5b3d175))
+
+
+
+<a name="2.0.0-beta.5"></a>
+# [2.0.0-beta.5](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2017-02-09)
+
+The new default expiry is now LocalStorageExpiry, and StorageInterruptSource has been added to the default module providers. This in effect makes idle coordination between tabs the new default (rather than `SimpleExpiry`). This makes the defaults more like the original `ng-idle`. You can of course override the `IdleExpiry` provider and go back to `SimpleExpiry` or use your own. Special thanks to @rousseaufiliong for porting that functionality.
+
+### Features
+
+* prevent timing out one tab or window if another tab have activity ([#33](https://github.com/HackedByChinese/ng2-idle/issues/33)) ([3ab086d](https://github.com/HackedByChinese/ng2-idle/commit/3ab086d))
+
+
+
+<a name="2.0.0-beta.4"></a>
+# [2.0.0-beta.4](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2016-12-02)
+
+## License
+
+* **LICENSE** change license to Apache-2.0 ([f8caa10](https://github.com/HackedByChinese/ng2-idle/commit/f8caa10))
+
 <a name="2.0.0-beta.3"></a>
 # [2.0.0-beta.3](https://github.com/HackedByChinese/ng2-idle/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2016-11-21)
 
