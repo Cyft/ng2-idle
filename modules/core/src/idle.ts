@@ -5,6 +5,7 @@ import {Interrupt} from './interrupt';
 import {InterruptArgs} from './interruptargs';
 import {InterruptSource} from './interruptsource';
 import {KeepaliveSvc} from './keepalivesvc';
+import {LocalStorageExpiry} from './localstorageexpiry';
 
 
 /*
@@ -58,6 +59,21 @@ export class Idle implements OnDestroy {
     if (keepaliveSvc) {
       this.keepaliveSvc = keepaliveSvc;
       this.keepaliveEnabled = true;
+    }
+    this.setIdling(false);
+  }
+
+  /*
+   * Sets the idle name for localStorage.
+   * Important to set if multiple instances of Idle with LocalStorageExpiry
+   * @param The name of the idle.
+   */
+  setIdleName(key: string): void {
+    if (this.expiry instanceof LocalStorageExpiry) {
+      this.expiry.setIdleName(key);
+    } else {
+      throw new Error(
+          'Cannot set expiry key name because no LocalStorageExpiry has been provided.');
     }
   }
 
@@ -242,7 +258,7 @@ export class Idle implements OnDestroy {
     this.safeClearInterval('idleHandle');
     this.safeClearInterval('timeoutHandle');
 
-    this.idling = false;
+    this.setIdling(false);
     this.running = false;
 
     this.expiry.last(null);
@@ -259,7 +275,7 @@ export class Idle implements OnDestroy {
     this.safeClearInterval('idleHandle');
     this.safeClearInterval('timeoutHandle');
 
-    this.idling = true;
+    this.setIdling(true);
     this.running = false;
     this.countdown = 0;
 
@@ -283,13 +299,18 @@ export class Idle implements OnDestroy {
     this.onInterrupt.emit(eventArgs);
 
     if (force === true || this.autoResume === AutoResume.idle ||
-        (this.autoResume === AutoResume.notIdle && !this.idling)) {
+        (this.autoResume === AutoResume.notIdle && !this.expiry.idling())) {
       this.watch(force);
     }
   }
 
+  private setIdling(value: boolean): void {
+    this.idling = value;
+    this.expiry.idling(value);
+  }
+
   private toggleState(): void {
-    this.idling = !this.idling;
+    this.setIdling(!this.idling);
 
     if (this.idling) {
       this.onIdleStart.emit(null);
@@ -326,7 +347,21 @@ export class Idle implements OnDestroy {
     }
   }
 
+  private getExpiryDiff(timeout: number): number {
+    let now: Date = this.expiry.now();
+    let last: Date = this.expiry.last() || now;
+    return last.getTime() - now.getTime() - (timeout * 1000);
+  }
+
   private doCountdown(): void {
+    let timeout = !this.timeoutVal ? 0 : this.timeoutVal;
+    let diff = this.getExpiryDiff(timeout);
+    if (diff > 0) {
+      this.safeClearInterval('timeoutHandle');
+      this.interrupt(true);
+      return;
+    }
+
     if (!this.idling) {
       return;
     }
