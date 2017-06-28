@@ -1,6 +1,6 @@
 {
   "name": "@cyft-ng-idle/core",
-  "version": "0.0.1-PLACEHOLDER",
+  "version": "0.0.2-PLACEHOLDER",
   "private": true,
   "description": "ng-idle for Angular 2+ core module",
   "main": "bundles/core.umd.js",
